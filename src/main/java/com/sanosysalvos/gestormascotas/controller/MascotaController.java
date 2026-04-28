@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -51,6 +52,14 @@ public class MascotaController {
         Mascota mascota = mascotaService.obtenerPorId(id);
         return ResponseEntity.ok(mascota);
     }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<Mascota> actualizarMascotaParcial(
+            @PathVariable Integer id, 
+            @RequestBody Mascota mascotaParcial) {
+
+        Mascota mascotaActualizada = mascotaService.actualizarMascotaParcial(id, mascotaParcial);
+        return ResponseEntity.ok(mascotaActualizada);
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminarMascota(@PathVariable Integer id) {
         mascotaService.eliminarMascota(id);
