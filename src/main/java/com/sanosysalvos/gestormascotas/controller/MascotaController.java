@@ -4,9 +4,9 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -36,14 +36,14 @@ public class MascotaController {
     @GetMapping
     public ResponseEntity<List<Mascota>> listarMascotas(
             @RequestParam(required = false) String estado) {
-        
+
         List<Mascota> mascotas;
         if (estado != null) {
             mascotas = mascotaService.obtenerPorEstado(estado);
         } else {
             mascotas = mascotaService.obtenerTodas();
         }
-        
+
         return ResponseEntity.ok(mascotas);
     }
 
@@ -55,15 +55,17 @@ public class MascotaController {
 
     @PatchMapping("/{id}")
     public ResponseEntity<Mascota> actualizarMascotaParcial(
-            @PathVariable Integer id, 
+            @PathVariable Integer id,
             @RequestBody Mascota mascotaParcial) {
 
         Mascota mascotaActualizada = mascotaService.actualizarMascotaParcial(id, mascotaParcial);
         return ResponseEntity.ok(mascotaActualizada);
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminarMascota(@PathVariable Integer id) {
         mascotaService.eliminarMascota(id);
-        
-        return ResponseEntity.noContent().build(); 
+
+        return ResponseEntity.noContent().build();
     }
 }

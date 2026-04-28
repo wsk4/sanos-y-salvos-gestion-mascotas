@@ -64,6 +64,8 @@ public class MascotaService {
 
         // 3. Guardamos los cambios
         return mascotaRepository.save(mascotaExistente);
+    }
+
     public void eliminarMascota(Integer id) {
         // Validamos que exista antes de intentar borrar
         Mascota mascotaExistente = obtenerPorId(id);
