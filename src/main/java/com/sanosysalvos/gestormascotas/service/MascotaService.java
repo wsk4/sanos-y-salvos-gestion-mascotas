@@ -34,4 +34,35 @@ public class MascotaService {
     public List<Mascota> obtenerPorEstado(String estado) {
         return mascotaRepository.findByEstado(estado.toUpperCase());
     }
+
+    public Mascota actualizarMascotaParcial(Integer id, Mascota mascotaParcial) {
+        // 1. Buscamos la mascota existente
+        Mascota mascotaExistente = obtenerPorId(id);
+
+        // 2. Solo actualizamos los campos que NO vengan nulos en la petición
+        if (mascotaParcial.getNombre() != null) {
+            mascotaExistente.setNombre(mascotaParcial.getNombre());
+        }
+        if (mascotaParcial.getRaza() != null) {
+            mascotaExistente.setRaza(mascotaParcial.getRaza());
+        }
+        if (mascotaParcial.getColor() != null) {
+            mascotaExistente.setColor(mascotaParcial.getColor());
+        }
+        if (mascotaParcial.getTamano() != null) {
+            mascotaExistente.setTamano(mascotaParcial.getTamano());
+        }
+        if (mascotaParcial.getFotoUrl() != null) {
+            mascotaExistente.setFotoUrl(mascotaParcial.getFotoUrl());
+        }
+        if (mascotaParcial.getEstado() != null) {
+            mascotaExistente.setEstado(mascotaParcial.getEstado().toUpperCase());
+        }
+        if (mascotaParcial.getContactoInfo() != null) {
+            mascotaExistente.setContactoInfo(mascotaParcial.getContactoInfo());
+        }
+
+        // 3. Guardamos los cambios
+        return mascotaRepository.save(mascotaExistente);
+    }
 }
