@@ -34,4 +34,9 @@ public class MascotaService {
     public List<Mascota> obtenerPorEstado(String estado) {
         return mascotaRepository.findByEstado(estado.toUpperCase());
     }
+    public void eliminarMascota(Integer id) {
+        // Validamos que exista antes de intentar borrar
+        Mascota mascotaExistente = obtenerPorId(id);
+        mascotaRepository.delete(mascotaExistente);
+    }
 }
