@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.sanosysalvos.gestormascotas.exception.MascotaNotFoundException;
 import com.sanosysalvos.gestormascotas.model.Mascota;
 import com.sanosysalvos.gestormascotas.repository.MascotaRepository;
 
@@ -28,7 +29,7 @@ public class MascotaService {
 
     public Mascota obtenerPorId(int id) {
         return mascotaRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Mascota no encontrada con el ID: " + id));
+                .orElseThrow(() -> new MascotaNotFoundException("Mascota no encontrada con el ID: " + id));
     }
 
     public List<Mascota> obtenerPorEstado(String estado) {
