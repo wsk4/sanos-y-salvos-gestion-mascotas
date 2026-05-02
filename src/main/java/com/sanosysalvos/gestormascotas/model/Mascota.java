@@ -1,12 +1,19 @@
 package com.sanosysalvos.gestormascotas.model;
 
-import jakarta.persistence.*;
+import java.time.LocalDateTime;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.PrePersist;
+import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "mascotas")
@@ -29,6 +36,9 @@ public class Mascota {
     private String color;
     
     private String tamano;
+
+    @Column(name = "foto_bytes", columnDefinition = "bytea") // 'bytea' es específico para PostgreSQL
+    private byte[] fotoBytes;
 
     @Column(name = "foto_url")
     private String fotoUrl;
