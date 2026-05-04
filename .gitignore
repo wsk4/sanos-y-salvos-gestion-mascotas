@@ -1,7 +1,10 @@
 # === SEGURIDAD (CRÍTICO) ===
 .env
-.env.*
+.env.local
+.env.dev
+.env.prod
 *.env
+
 
 # === MAVEN / JAVA ===
 target/
