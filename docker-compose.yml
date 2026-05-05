@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  # 1. Base de Datos para Gestión de Mascotas
+  postgres-gestion:
+    image: postgis/postgis:15-3.3
+    container_name: postgres-gestion
+    environment:
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+    ports:
+      - "5432:5432"
+    networks:
+      - sanos-network
+    volumes:
+      - pg_data_gestion:/var/lib/postgresql/data
+
+  # 2. Microservicio Gestión de Mascotas
+  ms-mascotas:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: sanos_ms_mascotas
+    ports:
+      - "${SERVER_PORT}:${SERVER_PORT}"
+    environment:
+      # Conexión a la base de datos interna de Docker
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres-gestion:5432/${DB_NAME}
+      SPRING_DATASOURCE_USERNAME: ${DB_USERNAME}
+      SPRING_DATASOURCE_PASSWORD: ${DB_PASSWORD}
+      SERVER_PORT: ${SERVER_PORT}
+    depends_on:
+      - postgres-gestion
+    networks:
+      - sanos-network
+
+# Configuración de la red externa compartida
+networks:
+  sanos-network:
+    external: true
+
+# Configuración de volúmenes para persistencia de datos
+volumes:
+  pg_data_gestion:
