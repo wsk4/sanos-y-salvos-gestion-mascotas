@@ -21,7 +21,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: sanos_ms_mascotas
+    container_name: sanos-ms-mascotas
     ports:
       - "${SERVER_PORT}:${SERVER_PORT}"
     environment:
