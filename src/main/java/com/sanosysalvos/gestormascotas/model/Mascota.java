@@ -17,9 +17,9 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "mascotas")
-@Data // Lombok: Genera automáticamente getters, setters, equals, hashCode y toString
-@NoArgsConstructor // Lombok: Constructor vacío (requerido por JPA)
-@AllArgsConstructor // Lombok: Constructor con todos los argumentos
+@Data 
+@NoArgsConstructor 
+@AllArgsConstructor 
 public class Mascota {
 
     @Id
@@ -37,7 +37,7 @@ public class Mascota {
     
     private String tamano;
 
-    @Column(name = "foto_bytes", columnDefinition = "bytea") // 'bytea' es específico para PostgreSQL
+    @Column(name = "foto_bytes", columnDefinition = "bytea")
     private byte[] fotoBytes;
 
     @Column(name = "foto_url")
@@ -52,7 +52,6 @@ public class Mascota {
     @Column(name = "contacto_info")
     private String contactoInfo;
 
-    // Se ejecuta automáticamente antes de guardar en la base de datos
     @PrePersist
     protected void onCreate() {
         this.fechaReporte = LocalDateTime.now();

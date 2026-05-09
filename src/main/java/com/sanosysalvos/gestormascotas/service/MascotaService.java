@@ -19,10 +19,9 @@ public class MascotaService {
     private final MascotaRepository mascotaRepository;
 
     public Mascota registrarMascota(Mascota mascota, MultipartFile archivo) throws IOException {
-        // Procesamos la imagen si viene en la petición
         if (archivo != null && !archivo.isEmpty()) {
             mascota.setFotoBytes(archivo.getBytes());
-            mascota.setFotoUrl(archivo.getOriginalFilename()); // Guardamos el nombre original como referencia
+            mascota.setFotoUrl(archivo.getOriginalFilename()); 
         }
         mascota.setEstado(mascota.getEstado().toUpperCase());
         return mascotaRepository.save(mascota);
@@ -68,7 +67,6 @@ public class MascotaService {
             }
         }
 
-        // Actualizamos la imagen solo si se adjunta una nueva
         if (archivo != null && !archivo.isEmpty()) {
             mascotaExistente.setFotoBytes(archivo.getBytes());
             mascotaExistente.setFotoUrl(archivo.getOriginalFilename());

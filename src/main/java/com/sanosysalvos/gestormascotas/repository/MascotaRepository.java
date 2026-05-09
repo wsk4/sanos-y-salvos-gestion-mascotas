@@ -9,6 +9,5 @@ import java.util.List;
 @Repository
 public interface MascotaRepository extends JpaRepository<Mascota, Integer> {
     
-    // Spring Data JPA crea la consulta SQL automáticamente solo con nombrar bien el método
     List<Mascota> findByEstado(String estado);
 }

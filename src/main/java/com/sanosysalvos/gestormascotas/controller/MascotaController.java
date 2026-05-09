@@ -2,7 +2,6 @@ package com.sanosysalvos.gestormascotas.controller;
 
 import java.io.IOException;
 import java.util.List;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -30,7 +29,6 @@ public class MascotaController {
 
     private final MascotaService mascotaService;
 
-    // Se cambia a MULTIPART_FORM_DATA_VALUE y se usan @RequestPart
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<Mascota> crearMascota(
             @RequestPart("mascota") @Valid Mascota mascota,
@@ -60,7 +58,6 @@ public class MascotaController {
         return ResponseEntity.ok(mascota);
     }
 
-    // Se adapta para recibir actualizaciones parciales que incluyan la imagen
     @PatchMapping(value = "/{id}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<Mascota> actualizarMascotaParcial(
             @PathVariable Integer id,
